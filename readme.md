@@ -2,6 +2,14 @@
 
 This project sets up **Prometheus** and **Grafana** for effective monitoring and visualization of system metrics. By integrating these two powerful tools, you can gain valuable insights into your application's performance and health.
 
+## Prometheus and Why I Needed Grafana
+
+The server I have is an HP Proliant 380P with 2 sockets and 12 cores for a total of 24 physical cores and 48 logical cores. I publish my websites from this machine. Sometimes the fans were running so much that it was impossible to understand what was happening at that moment. As you can see in the picture, the CPUs were always showing 0. I couldn't see what kind of load the machine was actually under. 
+
+I am a developer. Recently I have been working on artificial intelligence speach to text and text to speach. I needed to measure the performance and cpu ram disk costs of the machine at that moment. This is where the propertheus exporter and the database management and visualization in the graphana timeline structure convinced me. Now I can get detailed analysis of every work I do visually from graphana. This is a good proof method for the applications I develop.
+
+![img](./images/windows-cpu.png)
+
 ## Overview
 
 - **Prometheus**: An open-source monitoring and alerting toolkit that collects and stores metrics in a time-series database.
