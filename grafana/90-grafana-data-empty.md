@@ -44,6 +44,10 @@ Make sure that the NTP service is running correctly on your Windows server.
   ```
 - **Firewall Settings:** Ensure that the firewall settings on the Windows server are not blocking the NTP traffic. NTP uses UDP port 123, so make sure it is open.
 
+  ![query status](./images/query-status.png)
+
+  ![img](./images/udp-123.png)
+
 ### 5. **Check Metric Availability**
 
 If the configuration seems correct, check if the specific metric `windows_time_computed_time_offset_seconds` is available in the metrics exposed by the Windows Exporter.
