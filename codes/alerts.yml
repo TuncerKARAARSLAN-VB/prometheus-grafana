@@ -1,0 +1,83 @@
+groups:
+  - name: windows_alerts
+    rules:
+      - alert: HighCPUUsage
+        expr: sum(rate(wmi_cpu_time_total{mode="user"}[1m])) by (instance) > 0.9
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Yüksek CPU kullanımı"
+          description: "Sunucu {{ $labels.instance }} üzerindeki CPU kullanımı %90'ı geçti."
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 90
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High Memory Usage on {{ $labels.instance }}"
+          description: "{{ $labels.instance }} node is using more than 90% of total memory."  
+      - alert: HighDiskUsage
+        expr: (node_filesystem_size_bytes - node_filesystem_avail_bytes) / node_filesystem_size_bytes * 100 > 90
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High Disk Usage on {{ $labels.instance }}"
+          description: "{{ $labels.instance }} is using more than 90% of disk space."
+      - alert: HighHTTPResponseTime
+        expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le, instance)) > 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High HTTP response time on {{ $labels.instance }}"
+          description: "{{ $labels.instance }} has high HTTP response times."
+      - alert: ServiceDown
+        expr: up{job="your_service"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.job }} is down!"
+          description: "{{ $labels.job }} instance is not reachable."
+      - alert: SlowDatabaseQuery
+        expr: rate(database_query_duration_seconds_sum[5m]) / rate(database_query_duration_seconds_count[5m]) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Slow database query on {{ $labels.instance }}"
+          description: "Database queries are taking longer than 2 seconds on {{ $labels.instance }}."
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) < 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low disk space on {{ $labels.instance }}"
+          description: "{{ $labels.instance }} has less than 10% disk space available."
+      - alert: LowNetworkBandwidth
+        expr: rate(node_network_receive_bytes_total[5m]) < 1000000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low network bandwidth on {{ $labels.instance }}"
+          description: "Network bandwidth is below threshold on {{ $labels.instance }}."
+      - alert: HighTemperature
+        expr: node_hwmon_temp_celsius > 75
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High temperature on {{ $labels.instance }}"
+          description: "Temperature is above 75 degrees Celsius on {{ $labels.instance }}."
+      - alert: LongRunningJob
+        expr: job_duration_seconds > 300
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Long running job detected on {{ $labels.instance }}"
+          description: "Job is taking longer than 5 minutes to complete on {{ $labels.instance }}."

@@ -1,0 +1,5 @@
+groups:
+  - name: example_recording_rules
+    rules:
+      - record: job:cpu_usage:sum
+        expr: sum(rate(cpu_usage_seconds_total[5m])) by (job)
