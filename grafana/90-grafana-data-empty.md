@@ -58,6 +58,16 @@ If the configuration seems correct, check if the specific metric `windows_time_c
 
 ![img](./images/ntm-solved.png)
 
+```
+windows_exporter --collectors.enabled="cpu,cs,logical_disk,physical_disk,net,os,service,system,process,memory, kernel,pagefile,uptime,time"
+```
+
+![img](./images/solved.png)
+
+![img](./images/solved.png)
+
+![img](./images/data-arrive.png)
+
 ### 6. **Use Alternative Metrics**
 
 If you don't see the specific metric you are looking for, consider using alternative metrics provided by the Windows Exporter related to time synchronization.
