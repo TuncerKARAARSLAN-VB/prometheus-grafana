@@ -54,6 +54,10 @@ If the configuration seems correct, check if the specific metric `windows_time_c
 
 - **List Available Metrics:** Go to the metrics endpoint (`http://<server_ip>:9182/metrics`) and search for `windows_time_computed_time_offset_seconds`. If it is not listed, there may be an issue with how the Windows Exporter is collecting or exposing this metric.
 
+![img](./errors/cannot-find-in-export-data.png)
+
+![img](./images/ntm-solved.png)
+
 ### 6. **Use Alternative Metrics**
 
 If you don't see the specific metric you are looking for, consider using alternative metrics provided by the Windows Exporter related to time synchronization.
