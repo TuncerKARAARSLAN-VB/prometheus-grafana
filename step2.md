@@ -34,7 +34,7 @@
    - To start the Windows Exporter with all parameters, you can use the following command. Make sure to adjust the path if necessary based on your installation directory.
 
    ```bash
-   "C:\Program Files\windows_exporter\windows_exporter.exe" --collectors.enabled "cpu,cs,logical_disk,memory,net,os,system,service" --web.listen-address ":9182" --web.telemetry-path "/metrics"
+   "C:\Program Files\windows_exporter\windows_exporter.exe" --collectors.enabled "cpu,cs,logical_disk,memory,net,os,system,service" --web.listen-address ":9182"
    ```
 
    - This command will start the Windows Exporter with all the specified collectors. You can modify the `--collectors.enabled` parameter to include only the metrics you want to monitor.
